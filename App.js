@@ -3,16 +3,7 @@ import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import InputComponent from './components/InputComponent';
 
 export default function App() {
-  // const [word, setWord] = useState("");
   const [wordList, setWordList] = useState([]);
-
-  // const inputTextHandler = userInput => {
-  //   setWord(userInput);
-  //   //console.log(userInput); 
-  //   //this prints each input change 
-  //   //will dusplay r, re, red
-
-  // }
 
   const displayTextHandler = userInput => {
     setWordList(task => [...task, userInput]);
@@ -25,7 +16,11 @@ export default function App() {
       </View>
       <InputComponent displayTextHandler={displayTextHandler}/>
       <View>
-        {wordList.map((word, key) => <Text key={key}>{word}</Text>)}
+        {wordList.map((word, key) => 
+          <Text
+            key={key}
+            style={styles.listTasks}>{word}</Text>
+        )}
       </View>
     </View>
   );
@@ -41,15 +36,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center"
   },
-  input: {
-    borderBottomColor: "black",
+  listTasks: {
+    backgroundColor: "tomato",
     borderWidth: 1,
-    width: "70%",
-    padding: 4,
-    margin: 15
-  },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center"
+    marginHorizontal: 30,
+    padding: 15
   }
 });
