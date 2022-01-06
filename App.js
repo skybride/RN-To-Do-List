@@ -1,12 +1,17 @@
 import React, { useState} from "react";
-import { Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, FlatList, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import InputComponent from './components/InputComponent';
 
 export default function App() {
   const [wordList, setWordList] = useState([]);
 
   const displayTextHandler = userInput => {
-    setWordList(task => [...task, userInput]);
+    setWordList(task => [
+      ...task, {
+        key: Math.random().toString(),
+        value: userInput
+      }
+    ]);
   }
 
   return (
@@ -15,14 +20,15 @@ export default function App() {
         <Text style={styles.title}>To Do App</Text>
       </View>
       <InputComponent displayTextHandler={displayTextHandler}/>
-        <ScrollView>
-          {wordList.map((word, key) =>
-            <View
-              key={key}
-              style={styles.listTasks}>
-              <Text>{word}</Text>
-            </View>)}
-        </ScrollView>
+        <FlatList
+          keyExtractor={(item) => item.key}
+          data={wordList}
+          renderItem={(itemData) => (
+            <View style={styles.listTasks}>
+              <Text>{itemData.item.value}</Text>
+            </View>
+          )}>
+        </FlatList>
     </View>
   );
 }
