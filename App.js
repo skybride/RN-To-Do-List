@@ -1,5 +1,5 @@
 import React, { useState} from "react";
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import InputComponent from './components/InputComponent';
 
 export default function App() {
@@ -15,13 +15,14 @@ export default function App() {
         <Text style={styles.title}>To Do App</Text>
       </View>
       <InputComponent displayTextHandler={displayTextHandler}/>
-      <View>
-        {wordList.map((word, key) => 
-          <Text
-            key={key}
-            style={styles.listTasks}>{word}</Text>
-        )}
-      </View>
+        <ScrollView>
+          {wordList.map((word, key) =>
+            <View
+              key={key}
+              style={styles.listTasks}>
+              <Text>{word}</Text>
+            </View>)}
+        </ScrollView>
     </View>
   );
 }
@@ -40,6 +41,7 @@ const styles = StyleSheet.create({
     backgroundColor: "tomato",
     borderWidth: 1,
     marginHorizontal: 30,
-    padding: 15
+    padding: 15,
+    marginBottom: 20
   }
 });
