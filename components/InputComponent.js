@@ -1,18 +1,32 @@
 /**
  * Unable to style Core Button Component?
  */
-import React from "react";
-import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
+import React, { useState } from "react";
+import { View, Text, Button, TextInput, StyleSheet, Pressable } from "react-native";
 
-const InputComponent = () => {
+const InputComponent = ({ displayTextHandler }) => {
+    const [word, setWord] = useState("");
+
+    const inputTextHandler = userInput => {
+        setWord(userInput);
+    }
+
+    const pressHandled = () => {
+        displayTextHandler(word);
+    }
+    
     return (
         <View style={styles.inputContainer}> 
-            <TextInput
+            <View style={styles.inputContainer}>
+                <TextInput
                 style={styles.input}
-                placeholder="Add task..."/>
-            <Pressable style={styles.button}>
-                <Text style={styles.text}>Add</Text>
-            </Pressable>
+                placeholder="..."
+                onChangeText={inputTextHandler}
+                value={word}/>
+                <Pressable style={styles.button} onPress={pressHandled}>
+                    <Text style={styles.text}>Add</Text>
+                </Pressable>
+            </View>
         </View>
 
     );
