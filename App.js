@@ -14,6 +14,10 @@ export default function App() {
     ]);
   }
 
+  const deleteHandler = () => {
+    console.log("pressed");
+  }
+
   return (
     <View>
       <View style={styles.container}>
@@ -25,7 +29,8 @@ export default function App() {
         data={wordList}
         renderItem={(renderItem) => (
           <DisplayTextComponent
-            text={renderItem.item.value}/>
+            text={renderItem.item.value}
+            onPressDelete={deleteHandler}/>
         )}>
       </FlatList>
     </View>
